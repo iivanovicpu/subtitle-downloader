@@ -1,0 +1,30 @@
+core/src/main/webapp/
+
+web/build/
+web/node_modules/
+
+core/.settings
+core/.project
+core/target
+core/.classpath
+
+.scannerwork
+sonar-project.properties
+
+### Eclipse & STS ###
+.classpath
+.metadata
+.project
+.settings
+.externalToolBuilders
+.apt_generated
+.factorypath
+.springBeans
+bin
+target
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr

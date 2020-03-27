@@ -1,0 +1,54 @@
+OpenSubtitles downloader:
+Primjer pozivanja (Command line parametri):
+* downloadDir - ako ne postoji, kreira se
+1. download subtitle-ova za sve video file-ove u direktoriju D:\Downloads\test. Subtitle datoteke downloadat će se u istom direktoriju
+    --dir D:\Downloads\test
+    -d D:\Downloads\test
+
+2. download subtitle-ova za sve video file-ove u direktoriju D:\Downloads\test. Subtitle datoteke downloadat će se u istom direktoriju
+    --dir D:\Downloads\test -download D:\Downloads\test\subs
+    --d D:\Downloads\test -t D:\Downloads\test\subs
+
+3. download subtitle-ova po nazivu filma "Forest Gump". Subtitle datoteke downloadat će se u radni direktorij programa.
+    -name "Forest Gump"
+    -n "Forest Gump"
+
+4. download subtitle-ova po nazivu filma "Forest Gump". Subtitle datoteke downloadat će se u direktorij D:\Downloads\test
+    --name "Forest Gump" --t D:\Downloads\test
+    --n "Forest Gump" -download D:\Downloads\test
+
+TODO:
+- command line parametri:
+    - popis jezika
+    - rezidentnost na direktorij -> program ostaje startan, povremeno provjerava nove file-ove u direktoriju i pokreće
+    download samo za file-ove koji nemaju titlove
+- kreirati jar sa svim dependencyjima da se može pokrenuti izvan ideje
+-----------
+-n name of movie
+-d movie directory
+
+
+-----------
+- UI:
+    - settings
+    - tray icon
+    - rezidentnost ili on demand
+
+Automatski download (command line):
+	1. ulazni parametri: 
+		- path (direktorij s filmovima / serijama)
+		- jezici
+
+	2. kreiranje liste file-ova (filmova / serija) iz path-a (ulaznog parametra)
+		- lista se genrira samo iz podržanih ekstenzija (avi, mp4, asf, ...)
+
+	3. Ako je zadana lista i jezici (inače kraj programa):
+
+	    - server info, login na opensubtitles.org
+	    - za svaki file iz liste:
+	        - za svaki zadani jezik, napraviti search po filename-u
+	        - download i spremanje u filename_jezik.srt * pregaziti stare datoteke ako postoje
+
+    4. logout i izlaz iz programa
+
+UI:
