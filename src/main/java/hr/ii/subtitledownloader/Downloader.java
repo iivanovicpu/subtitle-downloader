@@ -25,27 +25,17 @@ import java.util.regex.Pattern;
 
 public class Downloader {
     private static final Logger LOGGER = LoggerFactory.getLogger(SubtitleFile.class);
-    public static final String USER = "";   //"iivanovic";
-    public static final String PASS = "";   //""d1783rt";
+    public static final String USER = "";   // opensubtitles username
+    public static final String PASS = "";   // opensubtitles password
     public static final String LANG = "en";
     // this user agent is only for testing and development purposes, see:
     //    https://trac.opensubtitles.org/projects/opensubtitles/wiki/DevReadFirst
     public static final String USER_AGENT = "TemporaryUserAgent";
     private final OpenSubtitlesClientImpl client;
-//    private static String path;
 
     public Downloader() throws MalformedURLException {
         URL url = new URL("https", "api.opensubtitles.org", 443, "/xml-rpc");
         client = new OpenSubtitlesClientImpl(url);
-    }
-
-    public static void main(String[] args) throws IOException {
-        File yourFile = new File("D:\\Downloads\\test\\subs\\1");
-        if (!yourFile.exists()) {
-            Files.createDirectories(yourFile.toPath());
-        }
-
-        LOGGER.info("Finished !!!");
     }
 
     public void start(RunModes runMode, String directoryPath, String name, String downloadDir) {
@@ -111,7 +101,6 @@ public class Downloader {
         if (login()) {
             LOGGER.info("ServerInfo: {}", client.serverInfo());
 
-            // TODO: 29.1.2020. -> languages from arguments or properties
             movieFiles.forEach(m -> {
                 for (Languages language : Languages.values()) {
                     LOGGER.info("Searching for language: ({}-{})", language.query, language.suffix);
@@ -124,13 +113,12 @@ public class Downloader {
         }
         logout();
     }
-    // preraditi da bude Consumer i pozivati kao lambda expression
 
     public static String createSubtitleFileName(String title, String language, String originalSubtitleFileName) {
         int i = title.lastIndexOf(".");
         String subtitleExtension = getFileExtension(originalSubtitleFileName);
         if (i != -1 && i != 0) {
-            return title.substring(0, i) + "_" + language + subtitleExtension;
+            return title.substring(0, i) + "." + language + subtitleExtension;
         }
         return title + "_" + language + subtitleExtension;
     }
@@ -172,18 +160,28 @@ public class Downloader {
     }
 
     private String parseSeason(String fileName) {
-        Pattern p = Pattern.compile("(.*?)[.\\s][sS](\\d{2}).*");
+        Pattern p = Pattern.compile("(.*?)[.\\s][sS](\\d{1,3}).*");
         Matcher m = p.matcher(fileName);
         if (m.matches()) {
+            return m.group(2);
+        }
+        p = Pattern.compile("(.*?)[.(]([\\d{2}])[xX\\d{2}].*");
+        m = p.matcher(fileName);
+        if(m.matches()){
             return m.group(2);
         }
         return null;
     }
 
     private String parseEpisode(String fileName) {
-        Pattern p = Pattern.compile("(.*?)[.\\s][eE](\\d{2}).*");
+        Pattern p = Pattern.compile("(.*?)[eE](\\d{1,3}).*");
         Matcher m = p.matcher(fileName);
         if (m.matches()) {
+            return m.group(2);
+        }
+        p = Pattern.compile("(.*?)[.(][\\d{1,3}][xX]([\\d{1,3}]).*");
+        m = p.matcher(fileName);
+        if(m.matches()){
             return m.group(2);
         }
         return null;
