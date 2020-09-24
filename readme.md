@@ -1,7 +1,7 @@
 OpenSubtitles downloader - application downloads subtitles from OpenSubtitles.org. 
 After build / packaging application it could be run
 
-java -jar jopensubs-x.x.x.jar 
+java -jar jopensubs-x.x.x-jar-with-dependencies.jar 
 
 It has implemented few download modes:
 

@@ -79,7 +79,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>hr.ii.jopensubtitles.Main</mainClass>
+                            <mainClass>hr.ii.subtitledownloader.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
