@@ -18,6 +18,8 @@ Primjer pozivanja (Command line parametri):
     --n "Forest Gump" -download D:\Downloads\test
 
 TODO:
+- gui
+- log file kad se pokreće command line
 - command line parametri:
     - popis jezika
     - rezidentnost na direktorij -> program ostaje startan, povremeno provjerava nove file-ove u direktoriju i pokreće
